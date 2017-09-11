@@ -28,6 +28,7 @@ cc_binary(
         "Source/Modules/contract.cxx",
         "Source/Modules/directors.cxx",
         "Source/Modules/emit.cxx",
+        "Source/Modules/go.cxx",
         "Source/Modules/lang.cxx",
         "Source/Modules/main.cxx",
         "Source/Modules/module.cxx",
@@ -106,6 +107,22 @@ filegroup(
         "Lib/cstring.i",
         "Lib/cwstring.i",
         "Lib/exception.i",
+        "Lib/go/cdata.i",
+        "Lib/go/exception.i",
+        "Lib/go/go.swg",
+        "Lib/go/gokw.swg",
+        "Lib/go/goruntime.swg",
+        "Lib/go/gostring.swg",
+        "Lib/go/std_common.i",
+        "Lib/go/std_deque.i",
+        "Lib/go/std_except.i",
+        "Lib/go/std_list.i",
+        "Lib/go/std_map.i",
+        "Lib/go/std_pair.i",
+        "Lib/go/std_string.i",
+        "Lib/go/std_vector.i",
+        "Lib/go/stl.i",
+        "Lib/go/typemaps.i",
         "Lib/intrusive_ptr.i",
         "Lib/inttypes.i",
         "Lib/linkruntime.c",
@@ -311,7 +328,6 @@ genrule(
           "    -e '/swig_clisp/d'" +
           "    -e '/swig_csharp/d'" +
           "    -e '/swig_d/d'" +
-          "    -e '/swig_go/d'" +
           "    -e '/swig_guile/d'" +
           "    -e '/swig_java/d'" +
           "    -e '/swig_lua/d'" +
@@ -328,6 +344,7 @@ genrule(
           "    -e '/swig_sexp/d'" +
           "    -e '/swig_tcl/d'" +
           "    -e '/swig_uffi/d'" +
+          "    -e 's/int res = SWIG_main/Swig_cresult_name_set(\"_swig_result\"); int res = SWIG_main/'" +
           "    $< >$@",
 )
 

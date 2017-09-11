@@ -737,7 +737,13 @@ def _py_wrap_cc_impl(ctx):
   inputs += ctx.files._swiglib
   inputs += ctx.files.toolchain_deps
   swig_include_dirs = set(_get_repository_roots(ctx, inputs))
-  swig_include_dirs += sorted([f.dirname for f in ctx.files._swiglib])
+  for swig_include_dir in sorted([f.dirname for f in ctx.files._swiglib]):
+    if swig_include_dir.endswith("/python") or \
+        swig_include_dir.endswith("/Lib") or \
+        swig_include_dir.endswith("/cffi") or \
+        swig_include_dir.endswith("/std") or \
+        swig_include_dir.endswith("/typemaps"):
+      swig_include_dirs += [swig_include_dir]
   args = [
       "-c++", "-python", "-module", module_name, "-o", ctx.outputs.cc_out.path,
       "-outdir", ctx.outputs.py_out.dirname
